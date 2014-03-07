@@ -4,6 +4,12 @@ set -e
 
 source /usr/local/rvm/scripts/rvm
 cd /var/www/$APP_NAME/current
+
+if[ -a .ruby_version ]
+	RUBY_VERSION=$(cat .ruby-version)
+	su root -c 'rvm install $RUBY_VERSION --default'
+fi
+
 bundle install
 
 if ! gem spec passenger > /dev/null 2>&1; then 
