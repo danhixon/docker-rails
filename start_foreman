@@ -5,9 +5,9 @@ set -e
 if [ -a /var/www/$APP_NAME/current/.ruby-version ]
 then
 	echo ".ruby-version file found"
-	VERSION=$(cat /var/www/$APP_NAME/current/.ruby-version)
-	echo "installing ruby $VERSION"
-	su root -c 'source /usr/local/rvm/scripts/rvm && rvm install $VERSION --default'
+	export R_VERSION=$(cat /var/www/$APP_NAME/current/.ruby-version)
+	echo "installing ruby $R_VERSION"
+	su root -c 'source /usr/local/rvm/scripts/rvm && rvm install $R_VERSION --default'
 	echo "now what?"
 else
 	echo "no .ruby-version file found"
