@@ -6,6 +6,7 @@ source /usr/local/rvm/scripts/rvm
 cd /var/www/$APP_NAME/current
 
 if[ -a .ruby_version ]
+then
 	RUBY_VERSION=$(cat .ruby-version)
 	su root -c 'rvm install $RUBY_VERSION --default'
 fi
