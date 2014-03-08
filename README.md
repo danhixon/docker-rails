@@ -1,11 +1,11 @@
 docker-rails
 ============
 
-A simple Docker Image for running Ruby on Rails Rails applications with Passenger.
+A simple Docker Image for running Ruby on Rails Rails applications with Passenger. It is based off [danhixon/docker-sshd](https://github.com/danhixon/docker-sshd) so capistrano can connect to it via ssh.
 
 ## Starting The Container
 
-`docker run -d -name <containername> -link <dbcontainer>:db -v /var/www/<dir>:/var/www/<dir> -e APP_NAME=<appname> zumbrunnen/rails`
+`docker run -d -name <containername> -link <dbcontainer>:db -v /var/www/<dir>:/var/www/<dir> -e APP_NAME=<appname> danhixon/rails`
 
 When the container starts, the necessary gems will be installed, then the DB will be prepared (created and migrated), and eventually, Passenger will be started in standalone mode. See [the start script](../master/start_passenger) which will be triggered by `supervisord`.
 
@@ -15,8 +15,6 @@ When the container starts, the necessary gems will be installed, then the DB wil
 3. Override these default environment variables as needed (using `-e KEY=value`):
  * `APP_RUBY_VERSION=2.0.0`
  * `RAILS_ENV=production`
- * `DB_USERNAME=docker`
- * `DB_PASSWORD=docker`
 
 
 ## Database Connection

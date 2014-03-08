@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+source /usr/local/rvm/scripts/rvm
+cd /var/www/$APP_NAME/current
+
+bundle install
+
+if ! gem spec passenger > /dev/null 2>&1; then 
+  gem install passenger
+fi
+
+passenger start -p 80 -e $RAILS_ENV
