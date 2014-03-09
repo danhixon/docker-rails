@@ -1,5 +1,5 @@
 # Rails Application
-FROM danhixon/sshd
+FROM danhixon/docker-sshd
 MAINTAINER Dan Hixon <danhixon@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -12,8 +12,6 @@ RUN apt-get -yqq upgrade
 # libpq-dev is required for the pg gem
 # libxml2 libxslt-dev libxml2-dev are required by nokogiri:
 RUN apt-get -yqq install curl libpq-dev libxml2 libxslt-dev libxml2-dev
-RUN mkdir /var/run/sshd
-RUN /usr/sbin/sshd
 
 RUN \curl -sSL https://get.rvm.io | bash -s stable
 RUN su root -c 'source /usr/local/rvm/scripts/rvm && rvm install $APP_RUBY_VERSION --default'
