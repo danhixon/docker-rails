@@ -3,12 +3,15 @@
 set -e
 
 source /usr/local/rvm/scripts/rvm
-cd /var/www/$APP_NAME/current
-
-bundle install
+cd /var/www/$APP_NAME
 
 if ! gem spec passenger > /dev/null 2>&1; then 
   gem install passenger
 fi
 
-passenger start -p 80 -e $RAILS_ENV
+# This totally doesn't belong here but for now it's going in.
+# make docker environment global to all ssh users by appending to the PAM conf file:
+env | grep '^[A-Z].*$' | sed 's;\(^.*\)\(=.*\)$;\1    DEFAULT=""      OVERRIDE\2;' >> /etc/security/pam_env.conf
+# probably a really, really nasty hack
+
+passenger start current -p 80 -e $RAILS_ENV --no-friendly-error-pages --log-file /var/www/$APP_NAME/passenger.log
