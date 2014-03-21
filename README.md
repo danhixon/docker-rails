@@ -5,14 +5,17 @@ A simple Docker Image for running Ruby on Rails Rails applications with Passenge
 
 ## Starting The Container
 
-`docker run -d -name <containername> -link <dbcontainer>:db -v /var/www/<dir>:/var/www/<dir> -e APP_NAME=<appname> danhixon/rails`
+`docker run -d -p 384743:22 -name <containername> -link <dbcontainer>:db -v /var/www/<dir>:/var/www/<dir> -e APP_NAME=<appname> -e DB_USERNAME=$PG_APPUSER -e DB_PASSWORD=$PG_APPUSER_PASSWORD AUTHORIZED_KEYS="$(cat ~/.ssh/id_rsa.pub)" danhixon/rails`
 
 When the container starts, the necessary gems will be installed, then the DB will be prepared (created and migrated), and eventually, Passenger will be started in standalone mode. See [the start script](../master/start_passenger) which will be triggered by `supervisord`.
+
+You will also have ssh access by virtue of the [danhixon/sshd](https://github.com/danhixon/docker-sshd) base image.
 
 ###Remarks
 1. Link to a DBMS (`<dbcontainer>`) of your choice. It works with zumbrunnen/postgresql.
 2. `<dir>` must be equal to `$APP_NAME` and - when using Capistrano - be the same on the host and in the container for deployments (because of absolute symlinks)
-3. Override these default environment variables as needed (using `-e KEY=value`):
+3. Use AUTHORIZED_KEYS to grant sshd access to your deployment user.
+4. Override these default environment variables as needed (using `-e KEY=value`):
  * `APP_RUBY_VERSION=2.0.0`
  * `RAILS_ENV=production`
 
