@@ -9,7 +9,7 @@ if ! gem spec passenger > /dev/null 2>&1; then
   gem install passenger
 fi
 
-# This totally doesn't belong here but for now it's going in.
+# This totally doesn't belong here but for now it's going in because I know the server will execute it.
 # make docker environment global to all ssh users by appending to the PAM conf file:
 env | grep '^[A-Z].*$' | sed 's;\(^.*\)\(=.*\)$;\1    DEFAULT=""      OVERRIDE\2;' >> /etc/security/pam_env.conf
 # probably a really, really nasty hack
