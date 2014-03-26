@@ -2,8 +2,10 @@
 
 set -e
 
-source /usr/local/rvm/scripts/rvm
 cd /var/www/$APP_NAME
+
+# install APP_RUBY_VERSION if different than image... ? I don't know
+# /root/.rbenv/bin/rbenv install $APP_RUBY_VERSION; /root/.rbenv/bin/rbenv global $APP_RUBY_VERSION; gem install bundler;
 
 if ! gem spec passenger > /dev/null 2>&1; then 
   gem install passenger

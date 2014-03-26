@@ -16,7 +16,6 @@ You will also have ssh access by virtue of the [danhixon/sshd](https://github.co
 2. `<dir>` must be equal to `$APP_NAME` and - when using Capistrano - be the same on the host and in the container for deployments (because of absolute symlinks)
 3. Use AUTHORIZED_KEYS to grant sshd access to your deployment user.
 4. Override these default environment variables as needed (using `-e KEY=value`):
- * `APP_RUBY_VERSION=2.0.0`
  * `RAILS_ENV=production`
 
 
