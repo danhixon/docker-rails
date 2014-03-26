@@ -12,6 +12,6 @@ fi
 # This totally doesn't belong here but for now it's going in because I know the server will execute it.
 # make docker environment global to all ssh users by appending to the PAM conf file:
 env | grep '^[A-Z].*$' | sed 's;\(^.*\)\(=.*\)$;\1    DEFAULT=""      OVERRIDE\2;' >> /etc/security/pam_env.conf
-# probably a really, really nasty hack
+# Don't worry I know that this is probably a really, really nasty hack
 
 passenger start current -p 80 -e $RAILS_ENV --no-friendly-error-pages --log-file /var/www/$APP_NAME/passenger.log

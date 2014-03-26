@@ -12,7 +12,7 @@ When the container starts, the necessary gems will be installed, then the DB wil
 You will also have ssh access by virtue of the [danhixon/sshd](https://github.com/danhixon/docker-sshd) base image.
 
 ###Remarks
-1. Link to a DBMS (`<dbcontainer>`) of your choice. It works with zumbrunnen/postgresql.
+1. Link to a DBMS (`<dbcontainer>`) of your choice. It works with danhixon/ubuntu-postgres.
 2. `<dir>` must be equal to `$APP_NAME` and - when using Capistrano - be the same on the host and in the container for deployments (because of absolute symlinks)
 3. Use AUTHORIZED_KEYS to grant sshd access to your deployment user.
 4. Override these default environment variables as needed (using `-e KEY=value`):
